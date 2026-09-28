@@ -1,0 +1,381 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-color: #ffffff;
+    --apple-gray: #f5f5f7;
+    --apple-dark: #1d1d1f;
+    --text-primary: #1d1d1f;
+    --text-secondary: #86868b;
+    --accent-color: #0066cc;
+    --accent-hover: #0077ed;
+    --shadow-soft: 0 8px 30px rgba(0,0,0,0.04);
+    --shadow-float: 0 20px 40px rgba(0,0,0,0.08);
+    --nav-height: 48px;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+main {
+    flex: 1;
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.03em;
+}
+
+/* Glassmorphism utilities */
+.glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    transition: background 0.4s ease, border-bottom 0.4s ease;
+}
+
+.glass.nav-scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: var(--shadow-soft);
+}
+
+/* Product Image Wrapper */
+.product-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    padding: 20px;
+}
+
+.product-img-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    mix-blend-mode: multiply; /* Removes white backgrounds on images if placed on gray */
+}
+
+/* Apple/Stripe sleek card hover */
+.product-card {
+    border-radius: 20px;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(0,0,0,0.05);
+    background: #ffffff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-float);
+    border-color: transparent;
+}
+
+.product-card:hover .product-img-wrapper img {
+    transform: scale(1.1);
+}
+
+/* Stripe-like Ambient Glow */
+.ambient-glow {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(94,92,230,0.15) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    top: -20%;
+    left: -10%;
+    z-index: -1;
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.ambient-glow-2 {
+    position: absolute;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(10,132,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    bottom: -10%;
+    right: -10%;
+    z-index: -1;
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+/* Loading spinner */
+.loader {
+    border: 3px solid rgba(0,0,0,0.05);
+    border-top: 3px solid var(--text-primary);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    animation: spin 0.8s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite;
+    margin: 40px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Page transitions */
+.fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+.slide-up {
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sleek Button */
+.btn-sleek {
+    background-color: var(--text-primary);
+    color: white;
+    border-radius: 999px; /* Pill shape */
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-sleek:hover {
+    transform: scale(1.02);
+    background-color: #000;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.btn-secondary {
+    background-color: rgba(0,0,0,0.05);
+    color: var(--text-primary);
+    border-radius: 999px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(0,0,0,0.08);
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: saturate(180%) blur(20px);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 100;
+    border-radius: 12px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 8px 0;
+}
+
+.dropdown:hover .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* Hero Image Fade Slider */
+.hero-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-bg-image.active {
+    opacity: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,1) 100%);
+    z-index: 1;
+}
+
+/* Badges */
+.badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+.badge-new { background: #f5f5f7; color: #1d1d1f; }
+.badge-sale { background: #ff3b30; color: white; }
+.badge-best { background: #ff9500; color: white; }
+
+/* Scroll Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Feature Cards */
+.feature-card {
+    padding: 40px;
+    background: var(--apple-gray);
+    border-radius: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    background: #eeeeef;
+    transform: scale(1.02);
+}
+
+/* Footer */
+footer {
+    background-color: var(--apple-gray);
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.footer-link {
+    color: var(--text-secondary);
+    font-size: 13px;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+/* Button Glow */
+.btn-sleek:hover {
+    box-shadow: 0 0 20px rgba(0, 102, 204, 0.4);
+}
+
+/* ── Mini Cart Dropdown ──────────────────────────────────── */
+.mini-cart-dropdown {
+    transform-origin: top right;
+    animation: mini-cart-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes mini-cart-in {
+    from { opacity: 0; transform: scale(0.95) translateY(-8px); }
+    to   { opacity: 1; transform: scale(1)   translateY(0); }
+}
+
+#mini-cart-items {
+    scrollbar-width: thin;
+    scrollbar-color: #e5e7eb transparent;
+}
+
+#mini-cart-items::-webkit-scrollbar { width: 4px; }
+#mini-cart-items::-webkit-scrollbar-track { background: transparent; }
+#mini-cart-items::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 4px; }
+
+/* Notification */
+.notification-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #1d1d1f;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 9999;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.35s;
+    opacity: 0;
+    white-space: nowrap;
+}
+
+.notification-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.notification-toast.error {
+    background: #ff3b30;
+}
